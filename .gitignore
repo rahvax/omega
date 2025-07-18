@@ -1,0 +1,17 @@
+# Own extensions
+*.zsk
+*.sk
+
+# Execution binary
+main
+main.exe
+omega
+omega.exe
+test.exe
+test*
+
+# VSCode
+.vscode 
+
+# Directorys
+.ccls*
