@@ -12,4 +12,6 @@ int hash (const char *password, const char *tag, const int size);
 int legacyHasher (const char *password);
 /* Swap a hash */
 void swap (unsigned char *sha256Key, const unsigned char *sha256Tag, const char *tag);
+/* Select Flags and Start */
+void selectFlag(const int argc, char **argv);
 #endif
