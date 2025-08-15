@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #ifndef _OMEGA_H
 #define _OMEGA_H
-
 /* Encript a keyword with single-tag */
 int hash (const char *password, const char *tag, const int size);
 /* Encript a keyword without single-tag */

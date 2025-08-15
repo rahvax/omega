@@ -1,6 +1,9 @@
 /*
  Omega - Password-generator
  Encript a password with keys and words
+
+ Version: 1.0v without multipleHASH
+ Compile: make
  By: @Rahvax
 */
 #include "lib/omega.h"
