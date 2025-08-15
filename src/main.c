@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[]) {
   char *key = argv[1], *tag = argv[2], *size = NULL;
-  int opt=0, sizeHash=0;
+  int opt=0;
 
   if (argc < 3) {
     fprintf(stderr, "Modo de usar incorreto\f%s <key> <tag/-o> [--FLAGS]\n", argv[0]);
@@ -35,13 +35,13 @@ int main(int argc, char *argv[]) {
   }
   
   if (size) {
-    sizeHash = atoi(size);
-    if (sizeHash > 32)
-      sizeHash = 32;
+    if (atoi(size) > 32)
+      size = "32";
   }
   else
-    sizeHash = 32;
-  if (hash(key, tag, sizeHash) != 0) {
+    size = "32";
+
+  if (hash(key, tag, atoi(size)) != 0) {
     fprintf(stderr, "[-]: impossível gerar a hash, encerrado!\n");
     return 1;
   }
