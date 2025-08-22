@@ -1,4 +1,5 @@
 #include "lib/omega.h"
+#include <openssl/evp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +8,7 @@
 #include <openssl/crypto.h>
 #include <getopt.h>
 #include <unistd.h>
+#include <openssl/hmac.h>
 #define HASHLEN SHA256_DIGEST_LENGTH
 
 /* Legacy Encripter */
@@ -21,10 +23,10 @@ int legacyHasher (const char *keyword) {
 }
 
 void selectFlag(const int argc, char **argv) {
-    char *key = argv[1], *tag = argv[2], *size = NULL;
+  char *key = argv[1], *tag = argv[2], *size = NULL, *type=NULL;
   int opt=0;
 
-  while ((opt = getopt(argc, argv, "s:ho")) != -1) {
+  while ((opt = getopt(argc, argv, "s:t:ho")) != -1) {
     switch (opt) {
       case 's':
         size = optarg;
@@ -35,6 +37,13 @@ void selectFlag(const int argc, char **argv) {
       case 'o':
         legacyHasher(argv[1]);
 	return;
+      case 't':
+        if (strcmp(optarg, "hmac") && strcmp(optarg, "sha256")) {
+          fprintf(stderr, "[X]: esse tipo não é conhecido! Só disponível: hmac, sha256\n");
+          return;
+        }
+	type=optarg;
+	break;
       default:
         fprintf(stderr, "Erro no formato!\f%s <key> <tag/-o> [--FLAGS]\n", argv[0]);
 	break;
@@ -42,23 +51,44 @@ void selectFlag(const int argc, char **argv) {
   }
   
   if (size) {
-    if (atoi(size) > 32)
-      size = "32";
+    if (atoi(size) > 64)
+      size = "64";
   }
   else
-    size = "32";
+    size = "64";
 
-  if (hash(key, tag, atoi(size)) != 0) {
-    fprintf(stderr, "[-]: impossível gerar a hash, encerrado!\n");
-    return;
+  if (type && !strcmp(type, "hmac")) {
+    if (hashHMAC(key, tag, atoi(size)) != 0) {
+      fprintf(stderr, "[-]: impossível gerar a hash, encerrado!\n");
+      return;
+    }
+  } else {
+    if (hash(key, tag, atoi(size)) != 0) {
+      fprintf(stderr, "[-]: impossível gerar a hash, encerrado!\n");
+      return;
+    }
   }
+}
 
+int hashHMAC(const char *password, const char *tag, const int size) {
+  unsigned char keyHash[EVP_MAX_MD_SIZE];
+  unsigned int keylen;
+
+  if (!HMAC(EVP_sha256(), tag, strlen(tag), (const unsigned char *)password,
+            strlen(password), keyHash, &keylen)) {
+    return -1;
+  }
+  for (register int x = 0; x < keylen; x++) {
+        printf("%02x", keyHash[x]);
+  }
+  printf("\n");
+  return 0;
 }
 
 /* Hash a word */
 int hash(const char *password, const char *tag, const int size) {
-  unsigned char keyHash[SHA256_DIGEST_LENGTH];
-  unsigned char tagHash[SHA256_DIGEST_LENGTH];
+  unsigned char keyHash[SHA256_DIGEST_LENGTH],
+  tagHash[SHA256_DIGEST_LENGTH];
 
   if (!SHA256((const unsigned char *)password, strlen(password), keyHash)) {
     fprintf(stderr, "[-]: não foi possível gerar a chave\n");

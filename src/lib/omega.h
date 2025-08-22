@@ -13,4 +13,6 @@ int legacyHasher (const char *password);
 void swap (unsigned char *sha256Key, const unsigned char *sha256Tag, const char *tag);
 /* Select Flags and Start */
 void selectFlag(const int argc, char **argv);
+/* Encript a keywork with single-tag and HMAC */
+int hashHMAC (const char *password, const char *tag, const int size);
 #endif
