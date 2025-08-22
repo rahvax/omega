@@ -51,11 +51,11 @@ void selectFlag(const int argc, char **argv) {
   }
   
   if (size) {
-    if (atoi(size) > 64)
-      size = "64";
+    if (atoi(size) > 32)
+      size = "32";
   }
   else
-    size = "64";
+    size = "32";
 
   if (type && !strcmp(type, "hmac")) {
     if (hashHMAC(key, tag, atoi(size)) != 0) {
@@ -113,9 +113,9 @@ int hash(const char *password, const char *tag, const int size) {
 /* Mix KEY and TAG*/
 void swap(unsigned char *sha256Key, const unsigned char *sha256Tag, const char *tag) {
   size_t size = strlen(tag);
-  if (size > 64) {
-    size = 64;
-    fprintf(stderr, "formatado para o máximo 64\n");
+  if (size > 32) {
+    size = 32;
+    fprintf(stderr, "formatado para o máximo 32\n");
   }
   for (size_t x = 0; x < size; x++) {
     size_t hashPos = tag[x] % HASHLEN;
