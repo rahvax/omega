@@ -74,7 +74,7 @@ int hashHMAC(const char *password, const char *tag, const int size) {
   unsigned char keyHash[EVP_MAX_MD_SIZE];
   unsigned int keylen;
 
-  if (!HMAC(EVP_sha256(), tag, strlen(tag), (const unsigned char *)password,
+  if (!HMAC(EVP_sha3_512(), tag, strlen(tag), (const unsigned char *)password,
             strlen(password), keyHash, &keylen)) {
     return -1;
   }
