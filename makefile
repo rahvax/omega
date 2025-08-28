@@ -1,8 +1,9 @@
-DIR = build
+DIR  = build
+NAME = omega
 
 compile: src/main.c src/omega.c | $(DIR)
-	gcc -o $(DIR)/omega src/main.c src/omega.c -lcrypto
+	gcc -o $(DIR)/$(NAME) src/main.c src/omega.c -lcrypto
 run: compile
-	./build/omega passwordTest Github
+	./$(DIR)/$(NAME) passwordTest Github
 $(DIR):
 	@mkdir -p $(DIR)
