@@ -2,7 +2,7 @@
  Omega - Password-generator
  Encript a password with keys and words
 
- Version: 1.0v without multipleHASH
+ Version: 1.5v without multipleHASH
  Compile: make
  By: @Rahvax
 */
