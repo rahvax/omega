@@ -15,8 +15,3 @@ int main(int argc, char *argv[]) {
   }
   return 0;
 }
-
-/*
-  Vou refazer toda a base do software, então
-  essa branch pode conter problemas.
-*/

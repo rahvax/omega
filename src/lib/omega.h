@@ -4,4 +4,5 @@
 */
 #ifndef _OMEGA_H
 #define _OMEGA_H
+
 #endif
