@@ -1,1 +1,2 @@
-\0 -> NULL
+# Omega - Gerador de Senhas
+O projeto do Omega é simplesmente uma forma de gerar senhas, em várias hashs e cifras diferentes. Por enquanto, o projeto está em fase de refatoramento - onde estou refazendo todo o software com intuito de futuramente possuir melhor usuabilidade.
