@@ -55,7 +55,7 @@ char* extend(char *key, const char *comparedPhrase) {
   size_t keySize = strlen(key);
   size_t comparedSize = strlen(comparedPhrase);
 
-  if (key > comparedSize)
+  if (keySize > comparedSize)
     key[comparedSize] = '\0';
   else if (keySize < comparedSize) {
     size_t originalSize = keySize;
