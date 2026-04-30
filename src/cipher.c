@@ -3,18 +3,21 @@
 #include <stdio.h>
 #include <string.h>
 
-const char lowerCaseAlphabet[] = "abcdefghijklmnopqrstuvwxyz";
-const char upperCaseAlphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+char* extend(char *key, const char *comparedPhrase) {
+  size_t keySize = strlen(key);
+  size_t comparedSize = strlen(comparedPhrase);
 
-void toLowerCase(char *text) {
-  for (register int x = 0; text[x] != '\0'; x++) {
-    for (register int y = 0; y < SIZEALP; y++) {
-      if (text[x] == upperCaseAlphabet[y]) {
-        text[x] = lowerCaseAlphabet[y];
-        break;
-      }
-    }
+  if (keySize > comparedSize)
+    key[comparedSize] = '\0';
+  else if (keySize < comparedSize) {
+    size_t originalSize = keySize;
+
+    for (size_t x = keySize; x < comparedSize; x++)
+      key[x] = key[x % originalSize];
+    key[comparedSize] = '\0';
   }
+
+  return key;
 }
 
 int position(const char letter) {
