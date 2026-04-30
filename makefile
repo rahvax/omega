@@ -3,7 +3,7 @@ NAME = omega
 FLAGS = -std=c17 -Wall -Wextra -Wpedantic -Iinclude
 
 debug: src/main.c | $(DIR)
-	gcc $(FLAGS) -g -O0 src/*.c -o $(DIR)/debug/$(NAME)
+	gcc $(FLAGS) -g -O0 -DDEBUG src/*.c -o $(DIR)/debug/$(NAME)
 release: src/main.c | $(DIR)
 	gcc $(FLAGS) -O2 src/*.c -o $(DIR)/release/$(NAME)
 test: debug
