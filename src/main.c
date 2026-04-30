@@ -10,6 +10,7 @@
 #endif
 
 int main (int argc, char *argv[]) {
+    char buffer[256];
     Options options;
     initOptions(&options);
 
@@ -25,6 +26,11 @@ int main (int argc, char *argv[]) {
         --algorithm=%s\n",
     options.password ? options.password : "Não informado",
     options.algorithm ? options.algorithm : "Não informado");
-
+    
+    if (!options.password) {
+        printf("Password: ");
+        scanf("%255s", buffer);
+        options.password = buffer;
+    }
     return 0;
 }
