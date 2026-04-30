@@ -24,4 +24,6 @@ void showHelp (void);
 void initOptions(Options *options);
 /* Ler e definir os argumentos */
 void parsingOptions (int argc, char *argv[], Options *options);
+/* Transformar texto em caixa baixa */
+void toLowerCase(char *text);
 #endif
