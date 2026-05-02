@@ -1,4 +1,5 @@
 #include "include/core.h"
+#include "include/cipher.h"
 #include <stdio.h>
 #include <string.h>
 
