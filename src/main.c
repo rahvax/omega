@@ -22,15 +22,27 @@ int main (int argc, char *argv[]) {
     
     parsingOptions(argc, argv, &options);
     DEBUG_PRINT("Opções escolhidas: \n\
+        tag=%s\n\
         --password=%s\n\
-        --algorithm=%s\n",
+        --algorithm=%s\n\
+        --rotation=%i\n",
+    argv[1],
     options.password ? options.password : "Não informado",
-    options.algorithm ? options.algorithm : "Não informado");
+    options.algorithm ? options.algorithm : "Não informado",
+    options.rotation);
     
-    if (!options.password) {
-        printf("Password: ");
-        scanf("%255s", buffer);
-        options.password = buffer;
+    if (!options.algorithm) {
+        options.algorithm = "caesar";
+        omegaRun(argv[1], &options);
     }
+    else {
+        if (!options.password && strcmp(options.algorithm, "caesar") != 0 && strcmp(options.algorithm, "atbash")) {
+            printf("Password: ");
+            scanf("%255s", buffer);
+            options.password = buffer;
+        }
+        omegaRun(argv[1], &options);
+    }
+
     return 0;
 }

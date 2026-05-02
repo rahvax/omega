@@ -4,7 +4,7 @@
 #define SIZEALP 26
 #define VERSION "1.5"
 #define HELP_COMMAND "omega <tag> [argumentos]\n \
--p [--password]\tDefinir a senha por argumento \n \
+-p [--password]\tDefinir a senha por argumento, com exceção de caesar que\n\t\t\tusa a tag diretamente como password\n \
 -a [--algorithm]\tDefinir o tipo de algoritmo do programa\n \
 \n"
 
@@ -16,6 +16,7 @@ extern const char upperCaseAlphabet[];
 typedef struct {
     const char *password;
     const char *algorithm;
+    int rotation;
 } Options;
 
 /* Exibir a mensagem de ajuda */
@@ -26,4 +27,6 @@ void initOptions(Options *options);
 void parsingOptions (int argc, char *argv[], Options *options);
 /* Transformar texto em caixa baixa */
 void toLowerCase(char *text);
+/* Selecionar a função e executar */
+void omegaRun (char *tag, Options *options);
 #endif

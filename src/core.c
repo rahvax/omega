@@ -22,6 +22,7 @@ void toLowerCase(char *text) {
 void initOptions(Options *options) {
     options->password = NULL;
     options->algorithm = NULL;
+    options->rotation = 2;
 }
 
 void parsingOptions (int argc, char *argv[], Options *options) {
@@ -35,4 +36,13 @@ void parsingOptions (int argc, char *argv[], Options *options) {
             x++;
         }
     }
+}
+
+void omegaRun (char *tag, Options *options) {
+    if (!(strcmp(options->algorithm, "vigenere")))
+        vigenere((char *)options->password, tag);
+    else if (!(strcmp(options->algorithm, "caesar")) || !(strcmp(options->algorithm, "cesar")))
+        caesar(tag, options->rotation);
+    else if (!(strcmp(options->algorithm, "atbash"))) 
+        atbash(tag);
 }

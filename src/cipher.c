@@ -37,6 +37,7 @@ void caesar(char *password, const int rotation) {
     else if (character >= 'a' && character <= 'z')
       password[x] = lowerCaseAlphabet[(character - 'a' + rotation) % SIZEALP];
   }
+  printf("[Caesar]: %s\n", password);
 }
 
 void atbash(char *password) {
@@ -49,7 +50,7 @@ void atbash(char *password) {
       password[x] = lowerCaseAlphabet[SIZEALP - 1 - index];
   }
 
-  printf("[Cipher]: %s\n", password);
+  printf("[Atbash]: %s\n", password);
 }
 
 void vigenere(char *phrase, char *key) {
@@ -59,10 +60,11 @@ void vigenere(char *phrase, char *key) {
   toLowerCase(phrase);
   toLowerCase(key);
 
+  printf("[Vigenere]: ");
   for (size_t x = 0; x < maxSize; x++) {
     int phrasePosition = position(phrase[x]);
     int keyPosition = position(keyPointer[x]);
-
+    
     if (phrasePosition == -1 || keyPosition == -1) {
       printf("%c", phrase[x]);
       continue;
