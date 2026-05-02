@@ -1,28 +1,12 @@
-# Omega - Genpass
-A simple and functional password generator.
+# Omega - Gerador de Senhas
+A ideia do projeto é gerar senhas para uso em contas sociais, e coisas menos importantes. O gerador vai utilizar diversos algoritmos de criptografias, algumas serão próprias desenvolvidas por mim. O Omega é focado no uso de uma `tag` para modificar gerações de hashs e criptografias para criar uma diversificação em uma única chave, `password`, tornando uma só chave capaz de criar várias variações.
 
-## How it works?
-Omega receives two inputs. The first argument is the key to generate the password, and the second is a type of TAG. It is recommended that the TAG is the name of the social network or objective. Upon receiving the inputs, the algorithm will encrypt the key in SHA-256 and modify it with an hash generated using the TAG. In the end, Omega delivers a different key to each TAG, even if the same key is used.
+## Fase Atual
+A fase atual do Omega é a de iniciar o desenvolvimento dos algoritmos de hashs que irei estudar. Farei sempre uma versão `auditada` e uma versão `própria`. Na versão auditada, é o uso de bibliotecas como OpenSSL que são auditadas e verificadas para o uso em geração de hash, garantindo a precisão; então em chaves próprias, irá usar meu próprio algoritmo de geração. Todas as duas terão opção de modificação da saída.
 
-## Why use Omega?
-The idea is not to replace a complex manager that can generate and store all passwords. The objective of Omega is to generate passwords without storing them in online services where they are vulnerable to online services and exploitation techniques using web applications. Not that Omega is not exploitable, since it is a local service, but just offering a clean and fast alternative to having several different passwords without having to memorize all the keys or repeat the same password.
+### Capacidades Atuais
+- Geração de cifras Atbash, Caesar e Vigenere;
+## Planos
+Atualmente o plano para o Omega é ter algoritmos próprios de hashs, antes de ir para criptografia. Tanto para estudo próprio, quanto para uso diário. Irei, primeiramente, iniciar os algoritmos de hashs como SHA256 e MD5, onde irei aprender e dividir em uma versão já auditada, e outra exclusiva minha para aprendizado. 
 
-## How to compile
-
-### Requirements:
-* MAKE;
-* C/C++ Compiler;
-* Cup of coffe;
-* Reason to use this;
-
-Install MAKE and a C compiler (like GCC). <br>
-Ex: <br>
-`pacman -Sy gcc make` <br>
-After installing, make a `build` directory and compile the code using `make` command. When compiling, run a test command. <br> <br>
-
-See the original SHA-256: <br>
-`./build/omega password@ -o`
-
-See the difference: <br>
-`./build/omega password@ Discord && ./build/omega password@ Twitter` <br>
-Note that several parts of the password are different, especially the beginning and some characters between the center and the end. The result depends on the size of the TAG.
+Após esse desenvolvimento, irei iniciar o desenvolvimento do mesmo esquema para criptografias.

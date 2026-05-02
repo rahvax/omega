@@ -1,19 +1,48 @@
-/*
- Omega - Password-generator
- Encript a password with keys and words
-
- Version: 1.5v without multipleHASH
- Compile: make
- By: @Rahvax
-*/
-#include "lib/omega.h"
+#include "include/core.h"
+#include "include/cipher.h"
 #include <stdio.h>
+#include <string.h>
 
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    fprintf(stderr, "Modo de usar incorreto\f%s <key> <tag/-o> [--FLAGS]\n", argv[0]);
-    return -1;
-  }
-  selectFlag(argc, argv);
-  return 0;
+#ifdef DEBUG
+    #define DEBUG_PRINT(...) printf(__VA_ARGS__)
+#else
+    #define DEBUG_PRINT(...)
+#endif
+
+int main (int argc, char *argv[]) {
+    char buffer[256];
+    Options options;
+    initOptions(&options);
+
+    if (argc < 2) {
+        showHelp();
+        return 0;
+    }
+    printf("[Omega]: %s\n", VERSION);
+    
+    parsingOptions(argc, argv, &options);
+    DEBUG_PRINT("Opções escolhidas: \n\
+        tag=%s\n\
+        --password=%s\n\
+        --algorithm=%s\n\
+        --rotation=%i\n",
+    argv[1],
+    options.password ? options.password : "Não informado",
+    options.algorithm ? options.algorithm : "Não informado",
+    options.rotation);
+    
+    if (!options.algorithm) {
+        options.algorithm = "caesar";
+        omegaRun(argv[1], &options);
+    }
+    else {
+        if (!options.password && strcmp(options.algorithm, "caesar") != 0 && strcmp(options.algorithm, "atbash")) {
+            printf("Password: ");
+            scanf("%255s", buffer);
+            options.password = buffer;
+        }
+        omegaRun(argv[1], &options);
+    }
+
+    return 0;
 }

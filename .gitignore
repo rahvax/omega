@@ -3,15 +3,14 @@
 *.sk
 
 # Execution binary
-main
-main.exe
-omega
-omega.exe
-test.exe
 test*
+*.exe
 
-# VSCode
+# editor
 .vscode 
+*.el
+.editor
 
 # Directorys
 .ccls*
+build/*
