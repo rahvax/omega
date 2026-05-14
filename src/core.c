@@ -1,5 +1,6 @@
 #include "include/core.h"
 #include "include/cipher.h"
+#include "include/hash.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -42,6 +43,8 @@ void parsingOptions (int argc, char *argv[], Options *options) {
 void omegaRun (char *tag, Options *options) {
     if (!(strcmp(options->algorithm, "vigenere")))
         vigenere((char *)options->password, tag);
+    else if (!(strcmp(options->algorithm, "sha256")) || !(strcmp(options->algorithm, "sha-256")))
+        sha256(options->password, tag);
     else if (!(strcmp(options->algorithm, "caesar")) || !(strcmp(options->algorithm, "cesar")))
         caesar(tag, options->rotation);
     else if (!(strcmp(options->algorithm, "atbash"))) 

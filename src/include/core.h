@@ -2,7 +2,7 @@
 #define _CORE_H
 
 #define SIZEALP 26
-#define VERSION "1.5"
+#define VERSION "2.0"
 #define HELP_COMMAND "omega <tag> [argumentos]\n \
 -p [--password]\tDefinir a senha por argumento, com exceção de caesar que\n\t\t\tusa a tag diretamente como password\n \
 -a [--algorithm]\tDefinir o tipo de algoritmo do programa\n \
